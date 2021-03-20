@@ -1,0 +1,35 @@
+.newsItem {
+    width: 25%;
+    box-sizing: border-box;
+    margin: 10px 20px;
+    border: 2px solid darkgrey;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.newsItem figure {
+    margin: 0;
+    width: 100%;
+    height: 200px;
+
+}
+
+.newsItem img {
+    object-fit: cover;
+    margin: 0;
+}
+
+.newsItem.vanishing {
+    animation-name: vanishing;
+    animation-duration: 1s;
+}
+
+@keyframes vanishing {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

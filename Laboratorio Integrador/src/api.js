@@ -1,0 +1,1 @@
+export const USERS_URL = "http://5bd25dbbbded6100135c3065.mockapi.io/api/users/";

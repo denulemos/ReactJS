@@ -2,13 +2,13 @@
 
 Es una libreria de JS para Front-End.
 
-## ¿Qué es el desarrollo Front-End?
+#### ¿Qué es el desarrollo Front-End?
 
 Se refiere al desarrollo de lo que el usuario final (cliente) va a ver. Consiste, básicamente, en HTML, CSS y JS. Como desarrolladores, somos consientes que a medida que las paginas van creciendo, se van haciendo cada vez mas complejas, y para manejar estas necesidades, se crearon librerías como React.
 
 React fue creada por Facebook en 2013.
 
-## ¿Porque React?
+#### ¿Porque React?
 
 **Velocidad**
 
@@ -58,6 +58,7 @@ Este Script busca el div con el ID 'Container' y le agrega el `<h1>`
 En este caso, vamos a necesitar Node para crear un proyecto React. Vamos a crear una aplicación llamada "my-app"
 
 ```
+npm i -g create-react-app // instalar globalmente el CLI de React
 npx create-react-app my-app
 cd my-app
 npm start
@@ -87,7 +88,7 @@ ReactDOM.render(
 
 # JSX ❤️
 
-### ¿Qué es JSX?
+#### ¿Qué es JSX?
 
 Es una extension de Javascript que nos permite construir elementos de la UI usando codigo HTML pero en el medio del JS. No es obligatorio usarlo, pero si muy comun.
 Por ejemplo ->
@@ -98,6 +99,14 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
+
+Es importante que en cada archivo donde React tenga que hacer algo, tener el siguiente import:
+
+```
+import React from 'react';
+```
+
+Esto es para que funcione JSX. 
 
 Esta porcion de codigo llamada al metodo `Render` de React, y le pasa dos argumentos, el elemento HTML que queremos renderizar y el container del mismo (El elemento cuyo id es root).
 Tambien nos podemos manejar con variables como en el siguiente ejemplo:
@@ -112,11 +121,11 @@ ReactDOM.render(
 );
 ```
 
-### Atributos en JSX
+#### Atributos en JSX
 
 Podemos usar como atributos de un HTML nombres entre comillas como `<div id="container"></div>` o usar una expresion JS `<div id={user.id}></div>`
 
-### ¿Cómo funciona?
+#### ¿Cómo funciona?
 
 Cuando las expresiones JSX con compiladas, se convierten en objetos JS, que representan elementos de React, y luego estos elementos son usados para constuir el DOM para luego, mostrarlo en el navegador.
 
@@ -159,7 +168,11 @@ Cada parte numerada es un componente separado. Esto nos permite hacer **Separati
 * Cuando exportamos un componente SIN el default, al momento de importarlo, tenemos que rodearlo de llaves
   `import {HolaMundo} from './componentes`
 
-### Componentes de Función
+#### Componente Fragment
+
+Es un componente de React que sirve para wrappear varios componentes en uno, ya que NO podemos volver 2 componentes en el mismo nivel. Puede ser representado por `<Fragment>` o como `<>` un componente anonimo.
+
+#### Componentes de Función
 
 Es una funcion de JS.
 
@@ -194,7 +207,7 @@ ReactDOM.render(
 
 * No podian mantener un estado, no podian mantener variables con respecto a lo que sucede dentro de ellos, los **Hooks** hicieron que esto fuera posible.
 
-### Componentes de clase
+#### Componentes de clase
 
 Son usados cuando hay interacciones con el usuario mas avanzadas, como formularios o animaciones.
 Todos necesitan heredar de `React.Component`.
@@ -742,6 +755,9 @@ Hasta ahora pasabamos elementos por los `state` entre padre e hijo.
 **Redux** es una libreria de JS que puede ser usado con cualquier libreria de front-end, como Angular, React y JQuery.
 Sigue el principio de **Sigle Source of Truth**, es relocalizar todos los state y la logica por fuera de la app, para que cualquier componente acceda a lo que necesite.
 
+* Usamos Redux cuando queremos cumplir el **Patron de diseño Pub/Sub**.
+* **Container** : Componente de React que funciona con Redux
+
 ### Store
 
 En Redux, el state se guarda como un objeto, llamado `store`. Debe haber uno solo de estos por aplicacion.
@@ -874,10 +890,9 @@ Ejemplo POST -> `axios.post(url, data).then(response => console.log(response.dat
 ¿Porque usar Axios cuando ya nos viene Fetch por defecto?
 
 * La API de Fetch primero nos da una respuesta que nos devuelve un paso intermedio de cuando los headers de response son recibidos, es por eso que siempre a la primera promesa del fetch le hacemos un `.json()` y luego capturamos la segunda promesa
-
+  
   > fetch(url).then(response => response.json()).then(data => console.log(data));
-  >
-
+  
   Axios automatiza todo esto.
 * Fetch tiene problemas con el manejo de errores. En Axios podemos capturar los codigos de error en un catch.
 
@@ -894,3 +909,4 @@ componentDidMount() {
  );
  }
 ```
+

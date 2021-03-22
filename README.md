@@ -57,11 +57,18 @@ cd my-app
 npm start
 ```
 
+# Dependencias 
+
 #### Bootstrap
 
 Si queremos usar Bootstrap
 
 * Lo agregamos al `index.html` como import al `<head>`, y ya podemos usar sus clases en el className de nuestros elementos.
+* O simplemente instalamos la dependencia con `npm i bootstrap`
+* En `index.js` importamos `import 'bootstrap/dist/css/bootstrap.css';`
+
+#### uniqid
+
 
 ## Estructura del proyecto
 
@@ -150,7 +157,19 @@ onChange={(e) => {setNombre(e.target.value)}}
 />
 ```
 
-## Virtual DOM
+### OnSubmit()
+
+Evita que al apretar **submit** en un formulario, se recargue la pagina, en su lugar, que se ejecute una funcion, o lo que queramos. Podemos chequear lo que ingreso el usuario, etc..
+
+```javascript
+const validar = () => {
+event.preventDefault(); // Prevenir reload
+}
+
+<form onSubmit={validar} > </form>
+```
+
+# Virtual DOM
 
 Para que React pueda actualizar solo lo necesario de una pagina, se usa el **Virtual DOM** que es una representacion del DOM.
 

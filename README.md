@@ -57,7 +57,7 @@ cd my-app
 npm start
 ```
 
-# Dependencias 
+# Dependencias
 
 #### Bootstrap
 
@@ -68,7 +68,6 @@ Si queremos usar Bootstrap
 * En `index.js` importamos `import 'bootstrap/dist/css/bootstrap.css';`
 
 #### uniqid
-
 
 ## Estructura del proyecto
 
@@ -245,9 +244,10 @@ class Hello extends React.Component {
 
 # Props 👀️
 
-Los componentes de Funcion pueden aceptar argumentos, como las funciones de JS. A estas se le dicen `props` y representan a un objeto.
-Podemos mandar props entre componentes.
-Por ejemplo, si queremos usar props en nuestro componente `Hello` ->
+* Los componentes de Funcion pueden aceptar argumentos, como las funciones de JS.
+* A estas se le dicen `props` y representan a un objeto.
+  Podemos mandar props entre componentes
+* Por ejemplo, si queremos usar props en nuestro componente `Hello` ->
 
 ```
 function Hello(props) {
@@ -307,7 +307,7 @@ Ahora podemos usar el componente y renderizar varios items ->
 Si enviamos una funcion de la siguiente manera -> `<button onClick={props.funcion()} />`,  la misma se ejecutara NO en el onClick, si no, al momento de cargar al componente.
 Es por eso que debemos usar la funcion dentro de una funcion arrow anonima `<button onClick={() => props.funcion()} />`
 
-## Destructuring
+### Destructuring
 
 `const {nombre, apellido} = props;`
 
@@ -389,6 +389,9 @@ El `onClick` va a llamar a la funcion `increment()` y a sumarle uno al state cou
 * Los State pueden ser modificados usando `setState()`
 * El `setState()` renderiza de vuelta al componente
 * Los componentes con state se llaman `stateful`, y los que no, `stateless`
+
+# Routes / Rutas 🚀️
+
 
 # Hooks 🚀️
 

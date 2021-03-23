@@ -392,6 +392,56 @@ El `onClick` va a llamar a la funcion `increment()` y a sumarle uno al state cou
 
 # Routes / Rutas 🚀️
 
+* Se agrega mediante dependencia `yarn add react-router-dom`
+* Importamos lo que vamos a usar del dom en `App.jsx` (Ejemplo en el proyecto **rutas**)
+
+```javascript
+import {
+  BrowserRouter as Router,
+  Switch ,
+  Route, 
+  Link
+} from 'react-router-dom'
+```
+
+* Definimos las rutas, en `path` el path a definir y dentro, lo que se renderizará
+
+```javascript
+function App()
+ {return (
+<Router>// Aqui dentro se renderizaran el resto de componentes
+<Switch>
+<Route path="/">Inicio</Route>
+</Switch>
+</Router>  );}
+```
+
+* Se recomienda poner del path mas especifico al mas general en orden, ya que evalua en cascada. Otra que puedo hacer es `<Route exact path="/">` y evaluará que sea EXACTO el path, ahi podré hacerlo desordenado.
+* Si quiero hacer un **menú de opciones** uso `<Link>` de la siguiente manera
+
+```javascript
+<Router>
+
+    <Link to="/inicio">
+    Inicio
+    </Link>
+    <Link to="/">
+    Base</Link>
+    
+     <Switch>
+       .....
+     </Switch>
+   </Router>
+```
+
+Esto me generará un menú en el header por defecto con las opciones especificadas. Genera un `href` por opcion.
+
+* Si quiero mandar props mediante el path `<Route path="/inicio/:nombre">`, en ese caso podemos mandar un nombre por parametros que recibirá el componente que renderice **Inicio**, lo recojemos de la siguiente manera en el componente
+  
+  * Importamos `import {useParams} from 'react-router-dom';`
+  * Lo tomamos mediante destructuring `const {nombre} = useParams();`
+* Si quiero ir a una ruta de, por ejemplo, un usuario `<Link to={/usuario/${item.id} } key={item.id}> {item.name} </Link> `
+
 
 # Hooks 🚀️
 
@@ -453,11 +503,13 @@ Los hooks solo pueden ser usados dentro de un componente funcional. En el caso d
 
 React da metodos especificos para los ciclos de vida para los componentes de clase. Se llaman cuando el componente se monta, actualiza o desmonta.
 
-* Montar -> El componente se renderiza en la pagina
-* Desmontar -> El componente es removido de la pagina
+* **Montar**-> El componente se renderiza en la pagina
+* **Desmontar**-> El componente es removido de la pagina
 
-**componentDidMount()**
-Es llamado cuando el componente es **renderizado** es la pagina.  Se puede usar para inicializar cosas.
+
+
+* **componentDidMount()**
+  Es llamado cuando el componente es **renderizado** es la pagina.  Se puede usar para inicializar cosas.
 
 ```
 componentDidMount() {
@@ -467,11 +519,10 @@ componentDidMount() {
 
 Se recomienda para pedir la informacion inicial de los componentes.
 
-**componentWillUnmount()**
-Es llamado antes de que el componente vaya a ser desmontado del DOM. Se puede usar para librerar resources.
-
-**componentDidUpdate**
-Se llama cuando el componente se actualiza en el DOM. Podemos hacerlo, por ejemplo, para avisar cada vez que el counter se incrementa.
+* **componentWillUnmount()**
+  Es llamado antes de que el componente vaya a ser desmontado del DOM. Se puede usar para librerar resources.
+* **componentDidUpdate**
+  Se llama cuando el componente se actualiza en el DOM. Podemos hacerlo, por ejemplo, para avisar cada vez que el counter se incrementa.
 
 ```javascript
 componentDidUpdate() {
@@ -479,9 +530,10 @@ alert("Number of clicks: " + this.state.counter);
 }
 ```
 
-**useEffect()**
+### UseEffect()
+
 Lo importamos ->
-`import React, { useState, useEffect } from 'react';`
+`import React, { useEffect } from 'react';`
 
 Es un hook para los componentes funcionales. Combina los metodos anteriores en uno. Por ejemplo, en el caso del contador ->
 
@@ -508,8 +560,10 @@ En este caso, va a correr cuando el componente se monte y se actualice. Si quere
 ```
 useEffect(() => {
   //do something
-}, [count]);
+}, []);
 ```
+
+El array vacio son Dependencias que puede ser que usemos al ejecutar el Hook.
 
 Y si queremos un **componentWillUnmount**, useEffect puede devolver una funcion que "limpie" lo necesario
 
@@ -902,7 +956,7 @@ componentDidMount() {
 
 NEWS_API es una constante que posee la URL a donde estamos realizando la llamda.
 
-## Axios
+# Axios
 
 Es una libreria javascript para realizar llamadas AJAX, se puede instalar con NPM
 
@@ -916,10 +970,9 @@ Ejemplo POST -> `axios.post(url, data).then(response => console.log(response.dat
 ¿Porque usar Axios cuando ya nos viene Fetch por defecto?
 
 * La API de Fetch primero nos da una respuesta que nos devuelve un paso intermedio de cuando los headers de response son recibidos, es por eso que siempre a la primera promesa del fetch le hacemos un `.json()` y luego capturamos la segunda promesa
-
+  
   > fetch(url).then(response => response.json()).then(data => console.log(data));
-  >
-
+  
   Axios automatiza todo esto.
 * Fetch tiene problemas con el manejo de errores. En Axios podemos capturar los codigos de error en un catch.
 
@@ -936,3 +989,4 @@ componentDidMount() {
  );
  }
 ```
+

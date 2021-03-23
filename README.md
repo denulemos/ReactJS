@@ -1,6 +1,6 @@
 # React 🚀️
 
-Es una libreria de JS para Front-End de Facebook.
+❤️ **Este repositorio posee proyectos con ejemplos de cada una de las implementaciones acá explicadas. (Axios, Redux, Servicios de firebase, etc..)** ❤️
 
 #### ¿Qué es el desarrollo Front-End?
 
@@ -427,7 +427,7 @@ function App()
     </Link>
     <Link to="/">
     Base</Link>
-    
+  
      <Switch>
        .....
      </Switch>
@@ -437,11 +437,10 @@ function App()
 Esto me generará un menú en el header por defecto con las opciones especificadas. Genera un `href` por opcion.
 
 * Si quiero mandar props mediante el path `<Route path="/inicio/:nombre">`, en ese caso podemos mandar un nombre por parametros que recibirá el componente que renderice **Inicio**, lo recojemos de la siguiente manera en el componente
-  
+
   * Importamos `import {useParams} from 'react-router-dom';`
   * Lo tomamos mediante destructuring `const {nombre} = useParams();`
 * Si quiero ir a una ruta de, por ejemplo, un usuario `<Link to={/usuario/${item.id} } key={item.id}> {item.name} </Link> `
-
 
 # Hooks 🚀️
 
@@ -505,9 +504,6 @@ React da metodos especificos para los ciclos de vida para los componentes de cla
 
 * **Montar**-> El componente se renderiza en la pagina
 * **Desmontar**-> El componente es removido de la pagina
-
-
-
 * **componentDidMount()**
   Es llamado cuando el componente es **renderizado** es la pagina.  Se puede usar para inicializar cosas.
 
@@ -911,11 +907,11 @@ const store = createStore(
 
 Las funciones que podemos despachar tienen una firma, o parametros que podemos usar
 
-# React Asincrónico
+# React Asincrónico 🚀️
 
 Si estamos por ejemplo, haciendo una pagina de noticias tendremos que obtener las mismas desde una API o un servicio web. Tambien si estamos haciendo un login, tendremos que pasarle las credenciales a un servicio para poder obtener el token de acceso.
 
-### Usar Fetch en componentes de React
+#### Usar Fetch en componentes de React
 
 Los componentes de clase de React vienen hechos para que este la posibilidad de realizar acciones durante las distintas etapas de vida de los mismos. Por ejemplo, el `componentDidMount` que es cuando el componente ya existe en el DOM. **Se recomienda usar este para pedir la info inicial de los componentes**.
 
@@ -956,7 +952,7 @@ componentDidMount() {
 
 NEWS_API es una constante que posee la URL a donde estamos realizando la llamda.
 
-# Axios
+# Axios 🚀️
 
 Es una libreria javascript para realizar llamadas AJAX, se puede instalar con NPM
 
@@ -970,9 +966,10 @@ Ejemplo POST -> `axios.post(url, data).then(response => console.log(response.dat
 ¿Porque usar Axios cuando ya nos viene Fetch por defecto?
 
 * La API de Fetch primero nos da una respuesta que nos devuelve un paso intermedio de cuando los headers de response son recibidos, es por eso que siempre a la primera promesa del fetch le hacemos un `.json()` y luego capturamos la segunda promesa
-  
+
   > fetch(url).then(response => response.json()).then(data => console.log(data));
-  
+  >
+
   Axios automatiza todo esto.
 * Fetch tiene problemas con el manejo de errores. En Axios podemos capturar los codigos de error en un catch.
 
@@ -990,3 +987,12 @@ componentDidMount() {
  }
 ```
 
+# Firebase 🚀️
+
+Es un servicio de Google que proporciona bases de datos, analiticas, autenticaciones, etc..  Que son servicios independendientes entre si.
+
+#### Instalacion con NPM
+
+`npm i firebase`
+
+Para que funcione, debemos crear un archivo llamado, por ejemplo, `firebaseconfig.js ` con la configuracion y keys unicas que nos provee Firebase.

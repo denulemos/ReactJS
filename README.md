@@ -6,18 +6,28 @@ Es una libreria de JS para Front-End de Facebook.
 
 Se refiere al desarrollo de lo que el usuario final (cliente) va a ver. Consiste, básicamente, en HTML, CSS y JS. Como desarrolladores, somos consientes que a medida que las paginas van creciendo, se van haciendo cada vez mas complejas, y para manejar estas necesidades, se crearon librerías como React.
 
-React fue creada por Facebook en 2013.
+**¿No sabés JS? Recomiendo ir al archivo `JS para React` de este mismo repositorio para una breve introduccion**
 
-#### ¿Porque React?
+#### ¿Que es React?
 
-* DOM virtual y no DOM real
-* Rápido y escalable
+* React fue creada por Facebook en 2013, y sigue siendo mantenida por el mismo.
+* Se usa en Facebook, Netflix, Paypal, Instagram, etc.., son paginas que manejan un gran flujo de usuarios
+* No es un framework, es una libreria. La libreria puede ser integrada como parte de cualquier cosa (Por ejemplo, se podia combinar Angular con React)
+* Funciona con un DOM virtual y no DOM real
+* Es Rápido y escalable
 * JSX proporciona un codigo facil de leer y escribir
 * React se puede integrar a otra estructura de JS
 
+#### SPA (Single Page Application)
+Son apps web que simulan ser una unica pagina con contenido dinamico. La idea es darle la idea al usuario de que esta navegando una aplicacion de escritorio, que no recarga, satura, etc.., y si recarga, es porque esta realizando una peticion al servidor, no recarga toda la pagina, si no, que es una carga mucho mas amigable, dando una experiencia mucho mas fluida. 
+Este tipo de aplikcaciones interactua con 2 servicios, servicios REST y servicios Serverless (Como Firebase, solo consumimos su servicio, se recomienda para aprender como interactuar con el servicio REST o para aplicaciones pequeñas), los cuales desentralizan la logica de la aplicacion de la interfaz grafica. 
+
+* Evitan que el navegador recargue
+* La pagina no se satura ni realiza peticiones constantes al servidor. Solo pide lo necesario y lo renderiza.
+* No nos interesa con qué esta programado el backend, solo la respuesta JSON que recibimos del mismo.
 # Getting Started ❤️
 
-#### Agregar React al HTML
+#### Agregar React al HTML con CDN
 
 Primero, tenemos que agregar a React en la etiqueta `<head>` de nuestro HTML.
 
@@ -35,7 +45,7 @@ También tenemos que agregar otro Script para permitir el **uso de JSX** , esta 
 
 Creamos el container `<div id="container"></div>` y mostramos el primer mensaje hecho con React
 
-```javascript
+```html
 <script type="text/babel">
 ReactDOM.render(
   <h1>Hello, React!</h1>,
@@ -50,7 +60,7 @@ Este Script busca el div con el ID 'Container' y le agrega el `<h1>`
 
 En este caso, vamos a necesitar Node para crear un proyecto React. Vamos a crear una aplicación llamada "my-app"
 
-```
+```javascript
 npm i -g create-react-app // instalar globalmente el CLI de React
 npx create-react-app my-app
 cd my-app
@@ -67,7 +77,6 @@ Si queremos usar Bootstrap
 * O simplemente instalamos la dependencia con `npm i bootstrap`
 * En `index.js` importamos `import 'bootstrap/dist/css/bootstrap.css';`
 
-#### uniqid
 
 ## Estructura del proyecto
 
@@ -82,11 +91,19 @@ Se usa un **File Loader**. En el caso de React, se usa **Webpack**, crea un bund
 * `node_modules` -> Todas las dependencias. Pesa mucho, es ignorada por git.
 * `App.js` -> Es el componente main de la aplicacion que sera renderizado en el DOM. El primer nivel de nuestro virtual DOM
 
+
 # JSX ❤️
 
+#### Typescript o Javascript?
+React por defecto usa Javascript, al contrario de Angular que funciona con Typescript por defecto (haciendo que su curva de aprendizaje sea mucho mas lenta). En React tambien podemos utilizar ambos
+* Se recomienda TS por cuestiones de mantenimiento, pero no es excluyente 
+* React no usa JS al 100%, si no, utiliza JSX. 
 #### ¿Qué es JSX?
 
 Es una extension de Javascript que nos permite construir elementos de la UI usando codigo JS pero en el medio del HTML. No es obligatorio usarlo, pero si muy común.
+
+* Es una mezcla entre XML y JS, y asi, poder usar etiquetas de HTML, pero no usar directamente HTML en si mismo, ya que podemos crear tambien nuestras propias "etiquetas" (componentes)
+* No es un lenguaje en si mismo, viene integrado con la libreria Babel, que es importado y configurado por React
 
 Por ejemplo ->
 

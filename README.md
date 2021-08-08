@@ -12,11 +12,10 @@ Se refiere al desarrollo de lo que el usuario final (cliente) va a ver. Consiste
 
 * React fue creada por Facebook en 2013, y sigue siendo mantenida por el mismo.
 * Se usa en Facebook, Netflix, Paypal, Instagram, etc.., son paginas que manejan un gran flujo de usuarios
-* No es un framework, es una libreria. La libreria puede ser integrada como parte de cualquier cosa (Por ejemplo, se podia combinar Angular con React)
-* Funciona con un DOM virtual y no DOM real
-* Es Rápido y escalable
-* JSX proporciona un codigo facil de leer y escribir
+* No es un framework, es una libreria de JS. La libreria puede ser integrada como parte de cualquier cosa (Por ejemplo, se podia combinar Angular con React)
+* Es Rápido y escalable. Es declarativo y basado en componentes, le decimos qué queremos renderizar, pero no cómo, todo esto en componentes.
 * React se puede integrar a otra estructura de JS
+* Funciona con **Programacion Reactiva**, cada componente "reacciona" y se vuelve a renderizar cuando se produce un cambio de estado o llegan nuevas propiedades. Un ejemplo es el boton "Like" de Facebook, que cambia de estado cuando el usuario le hace click.
 
 #### SPA (Single Page Application)
 Son apps web que simulan ser una unica pagina con contenido dinamico. La idea es darle la idea al usuario de que esta navegando una aplicacion de escritorio, que no recarga, satura, etc.., y si recarga, es porque esta realizando una peticion al servidor, no recarga toda la pagina, si no, que es una carga mucho mas amigable, dando una experiencia mucho mas fluida. 
@@ -25,6 +24,17 @@ Este tipo de aplikcaciones interactua con 2 servicios, servicios REST y servicio
 * Evitan que el navegador recargue
 * La pagina no se satura ni realiza peticiones constantes al servidor. Solo pide lo necesario y lo renderiza.
 * No nos interesa con qué esta programado el backend, solo la respuesta JSON que recibimos del mismo.
+
+# Virtual DOM
+
+Para que React pueda actualizar solo lo necesario de una pagina, se usa el **Virtual DOM** que es una representacion del DOM real.
+
+Cuando un elemento cambia, primero se actualiza el VDOM, esto es un proceso muy rapido. Luego, React compara al VDOM con el estado anterior y solo aplica los cambios necesarios para que el DOM ya este en el estado actual del VDOM.
+
+Todo sale de `app.js`, que contiene X cantidad de componentes, y estos poseen Y cantidad de componentes. Si cambiamos algo del `app.js`, se actualiza todo, pero si cambiamos un componente X, solo se actualizara ese componente y sus hijos, nada más. Mas arriba en la jerarquia de componentes, mas refrezcos habrá, siempre de manera descendente, nunca ascendente.
+
+# Eventos Sinteticos
+Son una Abstraccion de los eventos nativos de los navegadores, hace que todo sea compatible con cualquier navegador sin necesidad de agregar librerias de más, no solo se soporta, por ejemplo, el click del usuario, si no tambien el "touch" desde un celular. 
 # Getting Started ❤️
 
 #### Agregar React al HTML con CDN
@@ -67,8 +77,6 @@ cd my-app
 npm start
 ```
 
-# Dependencias
-
 #### Bootstrap
 
 Si queremos usar Bootstrap
@@ -103,11 +111,10 @@ React por defecto usa Javascript, al contrario de Angular que funciona con Types
 Es una extension de Javascript que nos permite construir elementos de la UI usando codigo JS pero en el medio del HTML. No es obligatorio usarlo, pero si muy común.
 
 * Es una mezcla entre XML y JS, y asi, poder usar etiquetas de HTML, pero no usar directamente HTML en si mismo, ya que podemos crear tambien nuestras propias "etiquetas" (componentes)
+* Tambien fue desarrollado por Facebook. Este puede ser probado desde la consola virtual de Babel.
 * No es un lenguaje en si mismo, viene integrado con la libreria Babel, que es importado y configurado por React
 
-Por ejemplo ->
-
-```
+```javascript
 ReactDOM.render(
   <h1>Hello, React!</h1>,
   document.getElementById('root')
@@ -116,7 +123,7 @@ ReactDOM.render(
 
 Es importante que en cada archivo donde React tenga que hacer algo, tener el siguiente import:
 
-```
+```javascript
 import React from 'react';
 ```
 
@@ -125,7 +132,7 @@ Esto es para que funcione JSX.
 Esta porcion de codigo llamada al metodo `Render` de React, y le pasa dos argumentos, el elemento HTML que queremos renderizar y el container del mismo (El elemento cuyo id es root).
 Tambien nos podemos manejar con variables como en el siguiente ejemplo:
 
-```
+```javascript
 const name = "David";
 const el = <p>Hello, {name}</p>;
 
@@ -145,7 +152,7 @@ Cuando las expresiones JSX con compiladas, se convierten en objetos JS, que repr
 
 Por ejemplo, hagamos un contador que incremente el valor de una variable por segundo, y esto representa un parrafo en la pagina:
 
-```
+```javascript
 let counter = 0;
 
 function show() {
@@ -185,14 +192,6 @@ event.preventDefault(); // Prevenir reload
 <form onSubmit={validar} > </form>
 ```
 
-# Virtual DOM
-
-Para que React pueda actualizar solo lo necesario de una pagina, se usa el **Virtual DOM** que es una representacion del DOM.
-
-Cuando un elemento cambia, primero se actualiza el VDOM, esto es un proceso muy rapido. Luego, React compara al VDOM con el estado anterior y solo aplica los cambios necesarios para que el DOM ya este en el estado actual.
-
-Todo sale de `app.js`, que contiene X cantidad de componentes, y estos poseen Y cantidad de componentes. Si cambiamos algo del `app.js`, se actualiza todo, pero si cambiamos un componente X, solo se actualizara ese componente y sus hijos, nada más. Mas arriba en la jerarquia de componentes, mas refrezcos habrá, siempre de manera descendente, nunca ascendente.
-
 # Componentes 👀️
 
 Los componentes nos permiten separar la pagina en distintas partes reusables. Por ejemplo:
@@ -213,14 +212,12 @@ Es para no anidar muchos `<div>` en nuestro HTML final.
 
 #### Componentes de Función
 
-Es una funcion de JS.
+Es una funcion de JS, se usa cuando el componente no esta muy compuesto, o cuando quiero usar Hooks.
 
-```
-function Hello(){
+```javascript
+const Hello = () =>{
 return <h1>Hola</h1>;
 }
-
-const Function = () => {};
 ```
 
 * Los nombres de estos componentes deben empezar con mayuscula, de lo contrario, el navegador los va a tratar como elementos html.
@@ -232,7 +229,7 @@ Tenemos que crear el elemento JSX correspondiente
 
 Ahora podemos usar nuestro componente y renderizarlo:
 
-```
+```javascript
 function Hello() {
   return <h1>Hello world.</h1>;
 }
@@ -251,7 +248,7 @@ ReactDOM.render(
 Son usados cuando hay interacciones con el usuario mas avanzadas, como formularios o animaciones.
 Todos necesitan heredar de `React.Component`.
 
-```
+```javascript
 class Hello extends React.Component {
   render() {
     return <h1>Hello world.</h1>;
@@ -266,7 +263,7 @@ class Hello extends React.Component {
   Podemos mandar props entre componentes
 * Por ejemplo, si queremos usar props en nuestro componente `Hello` ->
 
-```
+```javascript
 function Hello(props) {
   return <p>Hello, {props.name}!</p>;
 }
@@ -277,7 +274,7 @@ Y asi, luego, se lo podemos mandar
 
 Los componentes pueden usar a otros componentes para generar un output, por ejemplo:
 
-```
+```javascript
 function App() {
   return <div>
     <Hello name="David" />
@@ -290,7 +287,7 @@ function App() {
 El codigo anterior, llama al componente Hello pero con distintos nombres.
 En los **componentes de clase** los props pueden ser accedidos de la siguiente manera:
 
-```
+```javascript
 class Hello extends React.Component {
   render() {
     return <p>Hello, {this.props.name}!</p>;
@@ -302,7 +299,7 @@ Ahora, por ejemplo, creemos una lista de compras.
 Cada item va a tener un nombre y un precio -> `<Item name="Cheese" price="4.99" />`
 El componente item va a renderizar lo siguiente ->
 
-```
+```javascript
 function Item(props) {
   return <div className="item">
   <b>Name:</b> {props.name} <br />
@@ -313,7 +310,7 @@ function Item(props) {
 
 Ahora podemos usar el componente y renderizar varios items ->
 
-```
+```javascript
 <Item name="Cheese" price="4.99" />
 <Item name="Bread" price="1.5" />
 <Item name="Ice cream" price="24" />
@@ -334,7 +331,7 @@ Lo declaramos antes, en vez de usar `props.nombre` cada ves que deseamos acceder
 
 State es un objeto que es agregado como propiedad en los **componentes de clase**
 
-```
+```javascript
 class Hello extends React.Component {
   state = {
     name: "James"
@@ -522,16 +519,13 @@ React da metodos especificos para los ciclos de vida para los componentes de cla
 * **Montar**-> El componente se renderiza en la pagina
 * **Desmontar**-> El componente es removido de la pagina
 * **componentDidMount()**
-  Es llamado cuando el componente es **renderizado** es la pagina.  Se puede usar para inicializar cosas.
+  Es llamado cuando el componente es **renderizado** es la pagina.  Se puede usar para inicializar cosas. Se recomienda para pedir la informacion inicial de los componentes.
 
-```
+```javascript
 componentDidMount() {
   this.setState({counter: 42});
 }
 ```
-
-Se recomienda para pedir la informacion inicial de los componentes.
-
 * **componentWillUnmount()**
   Es llamado antes de que el componente vaya a ser desmontado del DOM. Se puede usar para librerar resources.
 * **componentDidUpdate**
@@ -550,7 +544,7 @@ Lo importamos ->
 
 Es un hook para los componentes funcionales. Combina los metodos anteriores en uno. Por ejemplo, en el caso del contador ->
 
-```
+```javascript
 function Counter() {
   const [counter, setCounter] = useState(0);
 
@@ -570,17 +564,16 @@ function Counter() {
 
 En este caso, va a correr cuando el componente se monte y se actualice. Si queremos que corra solo ante el update del componente, agregamos lo siguiente:
 
-```
+```javascript
 useEffect(() => {
   //do something
 }, []);
 ```
 
 El array vacio son Dependencias que puede ser que usemos al ejecutar el Hook.
-
 Y si queremos un **componentWillUnmount**, useEffect puede devolver una funcion que "limpie" lo necesario
 
-```
+```javascript
 useEffect(() => {
   // do something
   
@@ -604,7 +597,7 @@ Por ejemplo, si queremos agregarle un evento al hacer click en un boton, tendria
 
 En el caso del contador, al apretar el boton, llamariamos a la funcion `increment()`
 
-```
+```javascript
 function Counter() {
  const [counter, setCounter] = useState(0);
 
@@ -624,7 +617,7 @@ La funcion `increment()` va a llamar al `setCounter()` para cambiar el estado de
 
 Podemos manejar los inputs del usuario mediante el `onChange()` en el ingreso de texto. Por ejemplo, si hacemos una app que cambie de km a millas, tendriamos que hacer algo asi ->
 
-```
+```javascript
 function Converter() {
   const [km, setKm] = useState(0);
 
@@ -1003,13 +996,3 @@ componentDidMount() {
  );
  }
 ```
-
-# Firebase 🚀️
-
-Es un servicio de Google que proporciona bases de datos, analiticas, autenticaciones, etc..  Que son servicios independendientes entre si.
-
-#### Instalacion con NPM
-
-`npm i firebase`
-
-Para que funcione, debemos crear un archivo llamado, por ejemplo, `firebaseconfig.js ` con la configuracion y keys unicas que nos provee Firebase.
